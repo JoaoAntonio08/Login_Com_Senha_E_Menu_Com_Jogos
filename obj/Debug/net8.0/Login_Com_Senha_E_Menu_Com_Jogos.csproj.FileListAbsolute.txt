@@ -1,0 +1,15 @@
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\bin\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.exe
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\bin\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.deps.json
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\bin\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.runtimeconfig.json
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\bin\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.dll
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\bin\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.pdb
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.AssemblyInfoInputs.cache
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.AssemblyInfo.cs
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.csproj.CoreCompileInputs.cache
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.sourcelink.json
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.dll
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\refint\Login_Com_Senha_E_Menu_Com_Jogos.dll
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.pdb
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\Login_Com_Senha_E_Menu_Com_Jogos.genruntimeconfig.cache
+C:\Users\joaob\OneDrive\Documentos\GitHub\Login_Com_Senha_E_Menu_Com_Jogos\obj\Debug\net8.0\ref\Login_Com_Senha_E_Menu_Com_Jogos.dll

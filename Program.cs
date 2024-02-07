@@ -210,31 +210,38 @@ class Program
         System.Console.WriteLine($"Sua senha atutal é {senhaUsuario}");
         System.Console.WriteLine("");
         System.Console.WriteLine($"------ {nomeUsuario} este é o nosso menu ------");
-        System.Console.WriteLine("1- Jogo da cobrinha");
+        System.Console.WriteLine("1- Calculando a taxa de Crescimento da População");
         System.Console.WriteLine("2- Calculadora");
-        System.Console.WriteLine("3- Sair");
+        System.Console.WriteLine("3- Gerador de Números Aleatórios");
+        System.Console.WriteLine("4- Sair");
         resposta = Console.ReadLine();
         do
         {
             if (resposta == "1")
             {
                 Console.Clear();
-                
+                TaxaPopulacao();
+
             }
             else if (resposta == "2")
             {
                 Console.Clear();
                 Calculadora();
             }
+            else if (resposta == "3")
+            {
+                Console.Clear();
+                GerarNumAleatorio();
+            }
 
-            else if (resposta != "3")
+            else if (resposta != "4")
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Tela Inválida");
                 System.Console.WriteLine("");
             }
 
-            if (resposta != "3") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
+            if (resposta != "4") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
             {
                 System.Console.WriteLine("------------------------------------------------------------");
                 System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
@@ -243,8 +250,9 @@ class Program
                 Console.Clear();
                 MostrarTelaPrincipal();
             }
-        } while (resposta != "3");
+        } while (resposta != "4");
     }
+    #region Calculadora
     public static void Calculadora()
     {
         // Declarando Variavéis
@@ -312,6 +320,11 @@ class Program
             simOuNao = Console.ReadLine();
 
         } while (simOuNao == "S" || simOuNao == "s");
+        System.Console.WriteLine("------------------------------------------------------------");
+        System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
+        System.Console.WriteLine("------------------------------------------------------------");
+        Console.ReadLine();
+        Console.Clear();
         MostrarTelaPrincipal();
         // while usando caso o usuário queira fazer uma nova conta
 
@@ -340,4 +353,113 @@ class Program
             return resultado;
         }
     }
+    #endregion Calculadora
+
+    #region Taxa De crescimento
+    public static void TaxaPopulacao()
+    {
+        Console.Clear();
+        System.Console.WriteLine($"############# Seja Bem Vindo {nomeUsuario} ao programa de calcular taxa de crescimento #############");
+
+        #region Perguntar nome dos países
+
+        string nomePaisA, nomePaisb;
+        System.Console.WriteLine("");
+        System.Console.WriteLine($"Para iniciarmos nosso programa {nomeUsuario} digite o nome do primeiro país:");
+        nomePaisA = Console.ReadLine();
+        System.Console.WriteLine("");
+        System.Console.WriteLine("Agora digite o nome do segundo o país:");
+        nomePaisb = Console.ReadLine();
+        System.Console.WriteLine("");
+
+        #endregion Perguntar nome dos países
+
+        #region Informações
+
+        System.Console.WriteLine($"{nomeUsuario} digite a população do país {nomePaisA}");
+        int populacaoA = int.Parse(Console.ReadLine());
+
+        System.Console.WriteLine("");
+        System.Console.WriteLine($"Agora {nomeUsuario} digite a taxa de crescimento do país {nomePaisA}");
+        int taxaPaisA = int.Parse(Console.ReadLine());
+
+        System.Console.WriteLine("");
+        System.Console.WriteLine($"{nomeUsuario} digite a população do país {nomePaisb}");
+        int populacaoB = int.Parse(Console.ReadLine());
+
+        System.Console.WriteLine("");
+        System.Console.WriteLine($"Por fim {nomeUsuario} digite a taxa de crescimento país {nomePaisb}");
+        int taxaPaisB = int.Parse(Console.ReadLine());
+        int contarAnos = 0;
+
+        #endregion Informações
+
+        do
+        {
+            contarAnos += 1;
+
+            populacaoA += RetornaDaPopulacao(populacaoA, taxaPaisA);
+            populacaoB += RetornaDaPopulacao(populacaoB, taxaPaisB);
+            System.Console.WriteLine($"----- Estamos no ano {contarAnos} -----");
+
+        } while (populacaoA > populacaoB);
+
+        System.Console.WriteLine("");
+        System.Console.WriteLine($"{nomeUsuario} a população do país {nomePaisb} passou a do país {nomePaisA} em {contarAnos} anos");
+        System.Console.WriteLine($"Sendo que atualmente a população do país {nomePaisA} é de {populacaoA}");
+        System.Console.WriteLine($"E a população atualmente do país {nomePaisb} é de {populacaoB}");
+        System.Console.WriteLine("");
+        System.Console.WriteLine("------------------------------------------------------------");
+        System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
+        System.Console.WriteLine("------------------------------------------------------------");
+        Console.ReadLine();
+        Console.Clear();
+        MostrarTelaPrincipal();
+
+        static int RetornaDaPopulacao(int parametroPopulacaoPais, int parametroTaxa)
+        {
+            int resultado = (parametroPopulacaoPais * parametroTaxa) / 100;
+
+            return resultado;
+        }
+    }
+    #endregion Taxa De crescimento
+
+    #region Gerador de números
+    public static void GerarNumAleatorio()
+    {
+        System.Console.WriteLine($"Seja bem vindo(a) {nomeUsuario}");
+        // Solicita ao usuário a quantidade de números que deseja gerar
+        Console.Write("Digite a quantidade de números que deseja gerar: ");
+        int quantidade = int.Parse(Console.ReadLine());
+
+        // Cria uma instância da classe Random
+        Random rng = new Random();
+
+        // Lista para armazenar os números gerados
+        var numerosAleatorios = new List<int>();
+
+        // Gera os números aleatórios e adiciona à lista
+        for (int i = 0; i < quantidade; i++)
+        {
+            numerosAleatorios.Add(rng.Next(1, 101)); // Gera um número entre  1 e  100
+        }
+
+        // Exibe os números gerados na tela, separados por vírgulas
+        for (int i = 0; i < numerosAleatorios.Count; i++)
+        {
+            Console.Write(numerosAleatorios[i]);
+            if (i < numerosAleatorios.Count - 1) // Não coloca vírgula após o último número
+                Console.Write(", ");
+        }
+        System.Console.WriteLine("");
+        System.Console.WriteLine("------------------------------------------------------------");
+        System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
+        System.Console.WriteLine("------------------------------------------------------------");
+        Console.ReadLine();
+        Console.Clear();
+        MostrarTelaPrincipal();
+    }
+    #endregion Gerador de números
+
 }

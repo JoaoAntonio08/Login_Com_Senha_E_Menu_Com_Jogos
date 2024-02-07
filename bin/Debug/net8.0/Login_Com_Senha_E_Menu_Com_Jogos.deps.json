@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Login_Com_Senha_E_Menu_Com_Jogos/1.0.0": {
+        "runtime": {
+          "Login_Com_Senha_E_Menu_Com_Jogos.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Login_Com_Senha_E_Menu_Com_Jogos/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
