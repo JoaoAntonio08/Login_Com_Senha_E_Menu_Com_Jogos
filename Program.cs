@@ -1,15 +1,9 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 class Program
 {
     // Declarando variáveis globais
+    public static double altura, peso, imc;
     public static string strSenhaTentativa, nomeUsuario, resposta;
     public static int SenhaTentativa, senhaUsuario;
     public static bool senhaCorreta = false;
@@ -213,7 +207,8 @@ class Program
         System.Console.WriteLine("1- Calculando a taxa de Crescimento da População");
         System.Console.WriteLine("2- Calculadora");
         System.Console.WriteLine("3- Gerador de Números Aleatórios");
-        System.Console.WriteLine("4- Sair");
+        System.Console.WriteLine("4- Calcular IMC");
+        System.Console.WriteLine("5- Sair");
         resposta = Console.ReadLine();
         do
         {
@@ -233,15 +228,25 @@ class Program
                 Console.Clear();
                 GerarNumAleatorio();
             }
+            else if (resposta == "4")
+            {
+                Console.Clear();
+                CalcularIMC();
+            }
+            else if (resposta == "5")
+            {
+                Console.Clear();
+                Sair();
+            }
 
-            else if (resposta != "4")
+            else if (resposta != "6")
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Tela Inválida");
                 System.Console.WriteLine("");
             }
 
-            if (resposta != "4") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
+            if (resposta != "6") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
             {
                 System.Console.WriteLine("------------------------------------------------------------");
                 System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
@@ -250,7 +255,7 @@ class Program
                 Console.Clear();
                 MostrarTelaPrincipal();
             }
-        } while (resposta != "4");
+        } while (resposta != "6");
     }
     #region Calculadora
     public static void Calculadora()
@@ -461,5 +466,51 @@ class Program
         MostrarTelaPrincipal();
     }
     #endregion Gerador de números
+
+    #region calculadora de imc
+    public static void CalcularIMC()
+    {
+        System.Console.WriteLine($"Ola, {nomeUsuario}, aqui você pode calcular seu Índice de Massa Corporal");
+        System.Console.WriteLine("Por favor, informe sua altura: ");
+        altura = double.Parse(Console.ReadLine());
+        System.Console.WriteLine("Agora informe seu peso: ");
+        peso = double.Parse(Console.ReadLine());
+
+        imc = peso / (altura * altura);
+
+        System.Console.WriteLine($"Seu IMC é de {imc:F2}");
+        switch (imc)
+        {
+            case < 18.5:
+                System.Console.WriteLine("Você está abaixo do peso");
+                break;
+            case < 24.9:
+                System.Console.WriteLine("Você está no peso ideal");
+                break;
+            case < 29.9:
+                System.Console.WriteLine("Você está um pouco acima do peso");
+                break;
+            case < 34.9:
+                System.Console.WriteLine("Você está com obesidade grau 1");
+                break;
+            case < 40:
+                System.Console.WriteLine("Você está com obesidade grau 2");
+                break;
+            case > 40:
+                System.Console.WriteLine("Você está com obesidade grau 3");
+                break;
+        }
+    }
+    #endregion calculadora de imc
+
+    #region sair
+    public static void Sair()
+    {
+        System.Console.WriteLine($"Obrigado pela preferência {nomeUsuario}, volte sempre!");
+        System.Console.WriteLine("Pressione qualquer tecla para sair: ");
+        string sair = Console.ReadLine();
+        Environment.Exit(0); // O '0' indica sucesso, enquanto outros valores indicam diferentes tipos de erros
+    }
+    #endregion sair
 
 }
