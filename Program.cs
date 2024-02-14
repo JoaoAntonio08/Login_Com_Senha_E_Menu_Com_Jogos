@@ -58,6 +58,7 @@ class Program
         }
     }
 
+    #region Menu para fazer cadastro
     static void MostrarPrimeiraTela()
     {
         // Solicita ao usuário que digite sua senha
@@ -103,6 +104,7 @@ class Program
         MostrarTelaPrincipal();
 
     }
+    #endregion Menu para fazer cadastro
 
     // Função Criada para Verificar se senha é composta por apenas números e com caracteres de 5 a 10 números
     public static bool ValidaSenha(string senha)
@@ -115,17 +117,6 @@ class Program
         // \d - Este é um metacaracter que corresponde a qualquer dígito decimal. Em outras palavras, corresponde a qualquer número de 0 a 9.
         // {5,10} - Estes são quantificadores que especificam que o padrão anterior (neste caso, um dígito) deve aparecer pelo menos 5 vezes, mas não mais do que 10 vezes.
         // $ - Este é o caractere de fim de linha. Ele indica que a correspondência deve terminar no final da string.
-    }
-    static void MostrarTerceiraTela() // Caso não tenha um arquivo de texto, está criando um novo e registrando
-    {
-        using (StreamReader reader = new StreamReader("usuarios.txt"))
-        {
-            string line;
-            while ((line = reader.ReadLine()) != null)
-            {
-                System.Console.WriteLine(line);
-            }
-        }
     }
 
     static void SalvarUsuarioNoArquivo(string nome, int senha)
@@ -141,6 +132,8 @@ class Program
 
         }
     }
+
+    #region Verificação de Usuario no .txt
     // Esta função verifica se a senha é correta para o usuário
     static bool VerificarSenha(string nomeUsuario, int senhaUsuario)
     {
@@ -195,21 +188,15 @@ class Program
 
         return false;
     }
+    #endregion Verificação de Usuario no .txt
 
+    #region Verificação de menu
     // Esta função mostra a tela principal
     public static void MostrarTelaPrincipal()
     {
+
         Console.Clear();
-        System.Console.WriteLine($"Seja bem vindo(a) {nomeUsuario}");
-        System.Console.WriteLine($"Sua senha atutal é {senhaUsuario}");
-        System.Console.WriteLine("");
-        System.Console.WriteLine($"------ {nomeUsuario} este é o nosso menu ------");
-        System.Console.WriteLine("1- Calculando a taxa de Crescimento da População");
-        System.Console.WriteLine("2- Calculadora");
-        System.Console.WriteLine("3- Gerador de Números Aleatórios");
-        System.Console.WriteLine("4- Calcular IMC");
-        System.Console.WriteLine("5- Sair");
-        resposta = Console.ReadLine();
+        VerficacaoUsuario();
         do
         {
             if (resposta == "1")
@@ -257,6 +244,8 @@ class Program
             }
         } while (resposta != "6");
     }
+    #endregion Verificação de menu
+
     #region Calculadora
     public static void Calculadora()
     {
@@ -513,4 +502,34 @@ class Program
     }
     #endregion sair
 
+    #region Menu
+    public static void VerficacaoUsuario()
+    {
+        if (senhaCorreta = false)
+        {
+            System.Console.WriteLine($"Seja bem vindo(a) pela sua primeira vez {nomeUsuario}");
+            System.Console.WriteLine($"{nomeUsuario} sua senha atual é {senhaUsuario}");
+            System.Console.WriteLine("");
+            System.Console.WriteLine($"------ {nomeUsuario} este é o nosso menu ------");
+            System.Console.WriteLine("1- Calculando a taxa de Crescimento da População");
+            System.Console.WriteLine("2- Calculadora");
+            System.Console.WriteLine("3- Gerador de Números Aleatórios");
+            System.Console.WriteLine("4- Calcular IMC");
+            System.Console.WriteLine("5- Sair");
+            resposta = Console.ReadLine();
+        }
+        else
+        {
+            System.Console.WriteLine($"Seja bem vindo(a) {nomeUsuario}");
+            System.Console.WriteLine("");
+            System.Console.WriteLine($"------ {nomeUsuario} este é o nosso menu ------");
+            System.Console.WriteLine("1- Calculando a taxa de Crescimento da População");
+            System.Console.WriteLine("2- Calculadora");
+            System.Console.WriteLine("3- Gerador de Números Aleatórios");
+            System.Console.WriteLine("4- Calcular IMC");
+            System.Console.WriteLine("5- Sair");
+            resposta = Console.ReadLine();
+        }
+    }
+    #endregion Menu
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Login_Com_Senha_E_Menu_Com_Jogos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac66258cb9ecfc110f8f332449fa5bb15e7adecb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3495e0b62086e2425d7ace1c8a3bd46f66f402a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Login_Com_Senha_E_Menu_Com_Jogos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Login_Com_Senha_E_Menu_Com_Jogos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
