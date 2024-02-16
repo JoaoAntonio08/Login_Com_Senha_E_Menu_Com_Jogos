@@ -1,9 +1,19 @@
-﻿using System.Text.RegularExpressions;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 class Program
 {
     // Declarando variáveis globais
     public static double altura, peso, imc;
+
+    #region Variaveis de conversão
+    public static double taxaCambioDolarParaReal = 4.97;
+    public static double taxaCambioEuroParaReal = 5.35;
+    public static double taxaCambioBitcoinParaReal = 258447.42;
+    public static double taxaCambioEthereumParaReal = 13779.65;
+    public static double valorMonetario;
+
+    #endregion Variaveis de conversão
     public static string strSenhaTentativa, nomeUsuario, resposta;
     public static int SenhaTentativa, senhaUsuario;
     public static bool senhaCorreta = false;
@@ -223,17 +233,22 @@ class Program
             else if (resposta == "5")
             {
                 Console.Clear();
+                ConversorMoedas();
+            }
+            else if (resposta == "6")
+            {
+                Console.Clear();
                 Sair();
             }
 
-            else if (resposta != "6")
+            else if (resposta != "7")
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Tela Inválida");
                 System.Console.WriteLine("");
             }
 
-            if (resposta != "6") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
+            if (resposta != "7") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
             {
                 System.Console.WriteLine("------------------------------------------------------------");
                 System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
@@ -242,7 +257,7 @@ class Program
                 Console.Clear();
                 MostrarTelaPrincipal();
             }
-        } while (resposta != "6");
+        } while (resposta != "7");
     }
     #endregion Verificação de menu
 
@@ -492,6 +507,83 @@ class Program
     }
     #endregion calculadora de imc
 
+    #region conversor de moedas
+    public static void ConversorMoedas()
+    {
+        System.Console.WriteLine($"###### Ola {nomeUsuario}, este é o nosso conversor de moedas");
+        System.Console.WriteLine("Aqui você pode converter as principais moedas do mundo");
+        System.Console.WriteLine("");
+        System.Console.WriteLine("Selecione entre essas moedas para converter");
+        System.Console.WriteLine("-----------------------");
+        System.Console.WriteLine("1- Dólar (USD)");
+        System.Console.WriteLine("2- Euro (EUR)");
+        System.Console.WriteLine("3- Bitcoin (BTC)");
+        System.Console.WriteLine("4- Ethereum (ETH)");
+        System.Console.WriteLine("-----------------------");
+        int convesorMoeda = int.Parse(Console.ReadLine());
+
+        System.Console.WriteLine("Agora digite quantidade que deseja converter:");
+        valorMonetario = double.Parse(Console.ReadLine());
+
+        if (convesorMoeda == 1)
+        {
+            double valorEmDolar = valorMonetario; // Valor que você quer converter de Dólar para Real
+            double valorEmReal = ConverterDolarParaReal(valorEmDolar);
+
+            Console.WriteLine($"{valorEmDolar:F2} USD é igual a {valorEmReal:F2} BRL");
+        }
+        else if (convesorMoeda == 2)
+        {
+            double valorEmEuro = valorMonetario; // Valor que você quer converter de Dólar para Real
+            double valorEmReal1 = ConverterEuroParaReal(valorEmEuro);
+
+            Console.WriteLine($"{valorEmEuro:F2} é igual a {valorEmReal1:F2} BRL");
+        }
+        else if (convesorMoeda == 3)
+        {
+            double valorEmBitcoin = valorMonetario; // Valor que você quer converter de Bitcoin para Real
+            double valorEmRealBitcoin = ConverterBitcoinParaReal(valorEmBitcoin);
+
+            Console.WriteLine($"{valorEmBitcoin:F2} BTC é igual a {valorEmRealBitcoin:F2} BRL");
+        }
+        else if (convesorMoeda == 4)
+        {
+            double valorEmEthereum = valorMonetario; // Valor que você quer converter de Ethereum para Real
+            double valorEmRealEthereum = ConverterEthereumParaReal(valorEmEthereum);
+
+            Console.WriteLine($"{valorEmEthereum:F2} ETH é igual a {valorEmRealEthereum:F2} BRL");
+        }
+
+        #region Funções
+        static double ConverterDolarParaReal(double valorEmDolar)
+        {
+            double valorEmReal = valorEmDolar * taxaCambioDolarParaReal;
+            return valorEmReal;
+        }
+
+        static double ConverterEuroParaReal(double valorEmEuro)
+        {
+            double valorEmReal1 = valorEmEuro * taxaCambioEuroParaReal;
+            return valorEmReal1;
+        }
+
+        static double ConverterBitcoinParaReal(double valorEmBitcoin)
+        {
+            double valorEmReal = valorEmBitcoin * taxaCambioBitcoinParaReal;
+            return valorEmReal;
+        }
+
+        static double ConverterEthereumParaReal(double valorEmEthereum)
+        {
+            double valorEmReal = valorEmEthereum * taxaCambioEthereumParaReal;
+            return valorEmReal;
+        }
+
+        #endregion Funções
+    }
+
+    #endregion conversor de moedas
+
     #region sair
     public static void Sair()
     {
@@ -515,7 +607,8 @@ class Program
             System.Console.WriteLine("2- Calculadora");
             System.Console.WriteLine("3- Gerador de Números Aleatórios");
             System.Console.WriteLine("4- Calcular IMC");
-            System.Console.WriteLine("5- Sair");
+            System.Console.WriteLine("5- Conversor de Moedas");
+            System.Console.WriteLine("6- Sair");
             resposta = Console.ReadLine();
         }
         else
@@ -527,9 +620,50 @@ class Program
             System.Console.WriteLine("2- Calculadora");
             System.Console.WriteLine("3- Gerador de Números Aleatórios");
             System.Console.WriteLine("4- Calcular IMC");
-            System.Console.WriteLine("5- Sair");
+            System.Console.WriteLine("5- Conversor de Moedas");
+            System.Console.WriteLine("6- Sair");
             resposta = Console.ReadLine();
         }
     }
-    #endregion Menu
+    #endregion Menu 
 }
+
+/*
+static double ConverterMoeda(int moedaBase, int moedaDestino, double valorMonetario)
+        {
+            double valorConvertido = 0;
+
+            switch (moedaBase)
+            {
+                case 1: // USD
+                    switch (moedaDestino)
+                    {
+                        case 1: // BRL
+                            valorConvertido = valorMonetario * taxaCambioDolarParaReal;
+                            break;
+                        case 2: // EUR
+                            valorConvertido = valorMonetario * taxaCambioDolarParaEuro;
+                            break;
+                        case 3: //BTC
+                            valorConvertido = valorMonetario * taxaCambioDolarParaBitcoin;
+                            break;
+                        case 4: // ETH
+                            valorConvertido = valorMonetario * taxaCambioDolarParaEthreium;
+                            break;
+                    }
+                    break;
+                case 2: // EUR
+                    switch (moedaDestino)
+                    {
+                        case 1: // BRL
+                            valorConvertido = valorMonetario * taxaCambioEuroParaReal;
+                            break;
+                            // Adicione outros casos para outras moedas de destino
+                    }
+                    break;
+                    // Adicione casos para Bitcoin e Ethereum
+            }
+
+            return valorConvertido;
+        }
+        */
