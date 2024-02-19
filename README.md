@@ -1,29 +1,27 @@
-Este programa em C# oferece uma série de funcionalidades relacionadas a usuários, cálculos matemáticos e geração de números aleatórios. Vamos analisar suas principais características:
+Este programa em C# é um sistema de login e uma coleção de ferramentas úteis, incluindo uma calculadora, calculadora de IMC, conversor de moedas, gerador de números aleatórios e um cálculo de taxa de crescimento populacional entre dois países.
 
-<br/>1. **Controle de Usuário**:
-  <br/>- O programa permite que os usuários se autentiquem com um nome de usuário e senha.
-  <br/>- Se um usuário já existir, ele pode fazer login; caso contrário, pode se cadastrar.
-  <br/>- Há um limite de três tentativas para inserção da senha correta.
+**Funcionalidades Principais:**
 
-<br/>2. **Registro de Usuários**:
-  <br/>- Quando um novo usuário se cadastra, seus dados (nome de usuário e senha) são registrados em um arquivo de texto.
+1. **Login de Usuário:** O programa inicia solicitando ao usuário que digite seu nome de usuário. Se o usuário já estiver cadastrado, ele será solicitado a inserir sua senha. Se a senha estiver correta, o usuário é levado ao menu principal. Caso contrário, são permitidas até três tentativas antes que o login seja cancelado.
 
-<br/>3. **Funcionalidades do Menu Principal**:
- <br/>- O menu principal oferece diversas opções:
-  <br/>- **Calculadora**: Permite ao usuário realizar operações matemáticas básicas.
-  <br/>- **Taxa de Crescimento da População**: Calcula em quantos anos a população de um país ultrapassará a população de outro país, com base nas taxas de crescimento informadas pelo usuário.
-   <br/>- **Gerador de Números Aleatórios**: Gera uma quantidade especificada de números aleatórios.
-   <br/>- **Cálculo do Índice de Massa Corporal (IMC)**: Calcula o IMC com base na altura e peso inseridos pelo usuário.
-   <br/>- **Sair**: Encerra o programa.
+2. **Cadastro de Usuário:** Se o nome de usuário não existir, o programa solicita ao usuário que crie uma senha. Após a confirmação da senha, os dados do usuário são salvos em um arquivo de texto.
 
-<br/>4. **Cálculos Matemáticos**:
-   <br/>- A calculadora oferece operações de adição, subtração, multiplicação e divisão.
-   <br/>- O cálculo do IMC classifica o resultado em diferentes categorias de acordo com os padrões estabelecidos.
+3. **Menu Principal:** Após o login bem-sucedido, o usuário é apresentado a um menu onde pode escolher entre as seguintes opções:
+   - Calculadora de Taxa de Crescimento da População
+   - Calculadora
+   - Gerador de Números Aleatórios
+   - Calculadora de IMC
+   - Conversor de Moedas
+   - Sair
 
-<br/>5. **Manuseio de Arquivos**:
-   <br/>- O programa lê e escreve dados em um arquivo de texto para armazenar informações sobre os usuários registrados.
+4. **Calculadora:** Permite ao usuário realizar operações matemáticas básicas, como adição, subtração, multiplicação e divisão entre dois números.
 
-<br/>6. **Validação de Entradas**:
-   <br/>- O programa valida a entrada de senha do usuário para garantir que ela seja composta apenas por números e tenha entre 5 e 10 caracteres.
+5. **Calculadora de Taxa de Crescimento da População:** Calcula em quantos anos a população de um país ultrapassará a população de outro país, com base nas taxas de crescimento populacional informadas.
 
-<br/>Essas são as principais funcionalidades e características do programa. Ele oferece uma variedade de utilidades, desde controle de usuários até cálculos matemáticos e manipulação de arquivos.
+6. **Calculadora de IMC:** Calcula o Índice de Massa Corporal (IMC) do usuário com base na altura e no peso fornecidos, além de fornecer uma classificação do IMC.
+
+7. **Conversor de Moedas:** Converte valores monetários entre dólar, euro, bitcoin e ethereum para real, com base em taxas de câmbio predefinidas.
+
+8. **Gerador de Números Aleatórios:** Gera uma quantidade especificada de números aleatórios entre 1 e 100.
+
+O programa utiliza funções para modularizar e organizar o código, permitindo uma manutenção mais fácil e uma melhor legibilidade. Além disso, inclui validações para garantir a entrada correta dos usuários e tratamento de erros para lidar com possíveis exceções durante a execução.
