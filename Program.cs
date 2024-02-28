@@ -7,6 +7,7 @@ class Program
     public static double altura, peso, imc;
 
     #region Variaveis de conversão
+    public static double taxaCambioRealParaReal = 1.00;
     public static double taxaCambioDolarParaReal = 4.97;
     public static double taxaCambioEuroParaReal = 5.35;
     public static double taxaCambioBitcoinParaReal = 258447.42;
@@ -238,17 +239,22 @@ class Program
             else if (resposta == "6")
             {
                 Console.Clear();
+                Calc.ExecutarCalculo();
+            }
+            else if (resposta == "7")
+            {
+                Console.Clear();
                 Sair();
             }
 
-            else if (resposta != "7")
+            else if (resposta != "8")
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Tela Inválida");
                 System.Console.WriteLine("");
             }
 
-            if (resposta != "7") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
+            if (resposta != "8") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
             {
                 System.Console.WriteLine("------------------------------------------------------------");
                 System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
@@ -525,6 +531,7 @@ class Program
         System.Console.WriteLine("Agora digite quantidade que deseja converter:");
         valorMonetario = double.Parse(Console.ReadLine());
 
+        #region situações
         if (convesorMoeda == 1)
         {
             double valorEmDolar = valorMonetario; // Valor que você quer converter de Dólar para Real
@@ -553,8 +560,10 @@ class Program
 
             Console.WriteLine($"{valorEmEthereum:F2} ETH é igual a {valorEmRealEthereum:F2} BRL");
         }
+        #endregion situações
 
-        #region Funções
+        #region funcoes
+
         static double ConverterDolarParaReal(double valorEmDolar)
         {
             double valorEmReal = valorEmDolar * taxaCambioDolarParaReal;
@@ -578,11 +587,52 @@ class Program
             double valorEmReal = valorEmEthereum * taxaCambioEthereumParaReal;
             return valorEmReal;
         }
-
-        #endregion Funções
+        #endregion funcoes
     }
 
     #endregion conversor de moedas
+
+    #region Probabilidade
+    public class Probabilidade
+    {
+        public static long Fatorial(int numero)
+        {
+            long resultado = 1;
+            for (int i = 1; i <= numero; i++)
+            {
+                resultado *= i;
+            }
+            return resultado;
+        }
+    }
+
+    public static class Calc
+    {
+        public static void ExecutarCalculo()
+        {
+            Console.Clear();
+            System.Console.WriteLine($"####### Ola {nomeUsuario} esté é o menu de calcular números fatoriais #######");
+            System.Console.WriteLine();
+            System.Console.WriteLine("Digite um número para fazer seu fatorial");
+            int numero = int.Parse(Console.ReadLine());
+
+            if (numero >= 60)
+            {
+                System.Console.WriteLine("Número Inválido, por favor digite um número menor que 59");
+                Console.ReadLine();
+                Calc.ExecutarCalculo();
+            }
+
+            long fatorial = Probabilidade.Fatorial(numero);
+            Console.WriteLine($"Há um total de {fatorial} possibilidades.");
+        }
+
+        public static void executa(string[] args)
+        {
+            ExecutarCalculo();
+        }
+    }
+    #endregion Probabilidade
 
     #region sair
     public static void Sair()
@@ -608,7 +658,8 @@ class Program
             System.Console.WriteLine("3- Gerador de Números Aleatórios");
             System.Console.WriteLine("4- Calcular IMC");
             System.Console.WriteLine("5- Conversor de Moedas");
-            System.Console.WriteLine("6- Sair");
+            System.Console.WriteLine("6- Probabilidade");
+            System.Console.WriteLine("7- Sair");
             resposta = Console.ReadLine();
         }
         else
@@ -621,9 +672,11 @@ class Program
             System.Console.WriteLine("3- Gerador de Números Aleatórios");
             System.Console.WriteLine("4- Calcular IMC");
             System.Console.WriteLine("5- Conversor de Moedas");
-            System.Console.WriteLine("6- Sair");
+            System.Console.WriteLine("6- Probabilidade");
+            System.Console.WriteLine("7- Sair");
             resposta = Console.ReadLine();
         }
     }
     #endregion Menu 
+
 }
