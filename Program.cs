@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 
@@ -5,6 +6,7 @@ class Program
 {
     // Declarando variáveis globais
     public static double altura, peso, imc;
+    public static int escolhaMenu;
 
     #region Variaveis de conversão
     public static double taxaCambioRealParaReal = 1.00;
@@ -244,17 +246,22 @@ class Program
             else if (resposta == "7")
             {
                 Console.Clear();
+                Cantada();
+            }
+            else if (resposta == "8")
+            {
+                Console.Clear();
                 Sair();
             }
 
-            else if (resposta != "8")
+            else if (resposta != "9")
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Tela Inválida");
                 System.Console.WriteLine("");
             }
 
-            if (resposta != "8") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
+            if (resposta != "9") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
             {
                 System.Console.WriteLine("------------------------------------------------------------");
                 System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
@@ -263,7 +270,7 @@ class Program
                 Console.Clear();
                 MostrarTelaPrincipal();
             }
-        } while (resposta != "7");
+        } while (resposta != "9");
     }
     #endregion Verificação de menu
 
@@ -616,9 +623,9 @@ class Program
             System.Console.WriteLine("Digite um número para fazer seu fatorial");
             int numero = int.Parse(Console.ReadLine());
 
-            if (numero >= 60)
+            if (numero >= 50)
             {
-                System.Console.WriteLine("Número Inválido, por favor digite um número menor que 59");
+                System.Console.WriteLine("Número Inválido, por favor digite um número menor que 50");
                 Console.ReadLine();
                 Calc.ExecutarCalculo();
             }
@@ -634,6 +641,113 @@ class Program
     }
     #endregion Probabilidade
 
+    #region Ajuda certa
+    public static void Cantada()
+    {
+        Console.Clear();
+        System.Console.WriteLine($"##### Ola {nomeUsuario} aqui onde você encontra as melhores cantandas #####");
+        System.Console.WriteLine("");
+        System.Console.WriteLine("1- Começar");
+        System.Console.WriteLine("2- Voltar o menu");
+        int escolha = int.Parse(Console.ReadLine());
+
+        if (escolha == 1)
+        {
+            Console.Clear();
+            System.Console.WriteLine("Então você mandará pela internet");
+            System.Console.WriteLine("Estamos gerando uma cantanda...");
+            Console.ReadLine();
+            Random rnd = new Random();
+            int select = rnd.Next(1, 7);
+
+            if (select == 1)
+            {
+                Console.Clear();
+                System.Console.WriteLine("🐕");
+                System.Console.WriteLine("Desculpa é que eu não treinei meu cachorro direito...");
+                System.Console.WriteLine("Ele vive correndo atrás de gatinhas");
+                Console.ReadLine();
+                Cantada();
+            }
+            else if (select == 2)
+            {
+                Console.Clear();
+                System.Console.WriteLine("Tentaram me derrubar aqui, mas eles não sabem");
+                System.Console.WriteLine("Que a única coisa que me derruba é seu sorriso/olhar");
+                Console.ReadLine();
+                Cantada();
+
+            }
+            else if (select == 3)
+            {
+                Console.Clear();
+                System.Console.WriteLine("Parabéns!");
+                System.Console.WriteLine("Você acaba de ganhar uma vaga na USLM");
+                System.Console.WriteLine("");
+                System.Console.WriteLine("Universidade do");
+                System.Console.WriteLine("Sorriso Mais");
+                System.Console.WriteLine("Lindo do");
+                System.Console.WriteLine("Mundo");
+                Console.ReadLine();
+                Cantada();
+
+            }
+            else if (select == 4)
+            {
+                Console.Clear();
+                System.Console.WriteLine("Mas isso é um storys ou");
+                System.Console.WriteLine("Um trailer para o paraíso??");
+                Console.ReadLine();
+                Cantada();
+
+            }
+            else if (select == 5)
+            {
+                Console.Clear();
+                System.Console.WriteLine("🍿");
+                System.Console.WriteLine("Até deixei um pouco de pipoca cair");
+                System.Console.WriteLine("Depois de ver esse espetáculo");
+                Console.ReadLine();
+                Cantada();
+
+            }
+            else if (select == 6)
+            {
+                Console.Clear();
+                System.Console.WriteLine("Se você fosse um crime...");
+                System.Console.WriteLine("Não me importaria de passar o resto da minha vida na prisão");
+                Console.ReadLine();
+                Cantada();
+
+            }
+            else
+            {
+                Console.Clear();
+                System.Console.WriteLine("Por favor informe um valor válido");
+                System.Console.WriteLine("Pressione ENTER para voltar");
+                Console.ReadLine();
+                Cantada();
+
+            }
+        }
+
+        else if (escolha == 2)
+        {
+            Console.Clear();
+            MostrarTelaPrincipal();
+        }
+
+        else
+        {
+            Console.Clear();
+            System.Console.WriteLine("Por favor informe um valor válido");
+            System.Console.WriteLine("Pressione ENTER para voltar");
+            Console.ReadLine();
+            Cantada();
+        }
+    }
+
+    #endregion Ajuda certa
     #region sair
     public static void Sair()
     {
@@ -659,7 +773,8 @@ class Program
             System.Console.WriteLine("4- Calcular IMC");
             System.Console.WriteLine("5- Conversor de Moedas");
             System.Console.WriteLine("6- Probabilidade");
-            System.Console.WriteLine("7- Sair");
+            System.Console.WriteLine("7- Cantanda");
+            System.Console.WriteLine("8- Sair");
             resposta = Console.ReadLine();
         }
         else
@@ -673,7 +788,8 @@ class Program
             System.Console.WriteLine("4- Calcular IMC");
             System.Console.WriteLine("5- Conversor de Moedas");
             System.Console.WriteLine("6- Probabilidade");
-            System.Console.WriteLine("7- Sair");
+            System.Console.WriteLine("7- Cantada");
+            System.Console.WriteLine("8- Sair");
             resposta = Console.ReadLine();
         }
     }
