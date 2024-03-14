@@ -1,12 +1,23 @@
+using System;
 using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography.X509Certificates;
+
 
 class Program
 {
     // Declarando variáveis globais
     public static double altura, peso, imc;
     public static int escolhaMenu;
+
+    #region variaiveis do jogo do Pedra papel e tesoura
+    public static string playerChoice, computerChoice;
+    public static int playerScore = 0;
+    public static int computerScore = 0;
+    public static string[] choices = { "pedra", "papel", "tesoura" };
+    public static bool playAgain = true;
+
+    #endregion variaiveis do jogo do Pedra papel e tesoura
 
     #region Variaveis de conversão
     public static double taxaCambioRealParaReal = 1.00;
@@ -251,17 +262,22 @@ class Program
             else if (resposta == "8")
             {
                 Console.Clear();
+                JogarPedraPapelTesoura();
+            }
+            else if (resposta == "9")
+            {
+                Console.Clear();
                 Sair();
             }
-
-            else if (resposta != "9")
+            // Adicione aqui a lógica para outras opções de menu...
+            else if (resposta != "10")
             {
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Tela Inválida");
                 System.Console.WriteLine("");
             }
 
-            if (resposta != "9") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
+            if (resposta != "10") // Caso tenha clicado algum número inválido temos a opção de voltar ao menu
             {
                 System.Console.WriteLine("------------------------------------------------------------");
                 System.Console.WriteLine("Pressione qualquer tecla par voltar ao menu");
@@ -270,8 +286,9 @@ class Program
                 Console.Clear();
                 MostrarTelaPrincipal();
             }
-        } while (resposta != "9");
+        } while (resposta != "10");
     }
+
     #endregion Verificação de menu
 
     #region Calculadora
@@ -654,11 +671,14 @@ class Program
         if (escolha == 1)
         {
             Console.Clear();
-            System.Console.WriteLine("Então você mandará pela internet");
             System.Console.WriteLine("Estamos gerando uma cantanda...");
+            System.Console.WriteLine(".........");
+            System.Console.WriteLine("");
+            System.Console.WriteLine("");
+            System.Console.WriteLine("Cantada gerada aperte ENTER para ve-la");
             Console.ReadLine();
             Random rnd = new Random();
-            int select = rnd.Next(1, 7);
+            int select = rnd.Next(1, 8);
 
             if (select == 1)
             {
@@ -720,14 +740,15 @@ class Program
                 Cantada();
 
             }
-            else
+            else if (select == 7)
             {
                 Console.Clear();
-                System.Console.WriteLine("Por favor informe um valor válido");
-                System.Console.WriteLine("Pressione ENTER para voltar");
+                System.Console.WriteLine("Boa noite aqui é do detran");
+                System.Console.WriteLine("Você acaba de receber 2 multas");
+                System.Console.WriteLine("Uma exesso de velocidade dos meus batimentos caridiácos");
+                System.Console.WriteLine("E outra por atroplear meu pscológico com essa sua beleza");
                 Console.ReadLine();
                 Cantada();
-
             }
         }
 
@@ -748,6 +769,79 @@ class Program
     }
 
     #endregion Ajuda certa
+    #region jogo Pedra Papel Tesoura
+    public static void JogarPedraPapelTesoura()
+    {
+        Random random = new Random();
+
+        while (playAgain)
+        {
+            bool validInput = false;
+            while (!validInput)
+            {
+                Console.WriteLine("Escolha pedra, papel ou tesoura:");
+                playerChoice = Console.ReadLine().ToLower();
+
+                // Verifica se a entrada é válida
+                if (playerChoice == "pedra" || playerChoice == "papel" || playerChoice == "tesoura")
+                {
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Entrada inválida. Tente novamente.");
+                }
+            }
+
+            computerChoice = choices[random.Next(choices.Length)];
+            Console.WriteLine($"Você escolheu {playerChoice}, o computador escolheu {computerChoice}.");
+
+            if (playerChoice == computerChoice)
+            {
+                Console.WriteLine("Empate!");
+            }
+            else if ((playerChoice == "pedra" && computerChoice == "tesoura") ||
+                     (playerChoice == "papel" && computerChoice == "pedra") ||
+                     (playerChoice == "tesoura" && computerChoice == "papel"))
+            {
+                Console.WriteLine("Você ganhou!");
+                playerScore++;
+            }
+            else
+            {
+                Console.WriteLine("Você perdeu!");
+                computerScore++;
+            }
+
+            Console.WriteLine($"Pontuação: Você {playerScore}, Computador {computerScore}");
+            Console.ReadLine();
+            Console.Clear();
+
+            // Verifica se o jogo deve terminar
+            if (playerScore == 5 || computerScore == 5)
+            {
+                Console.WriteLine("Fim de jogo!");
+
+                Console.WriteLine("Deseja jogar novamente? (s/n)");
+                playAgain = Console.ReadLine().ToLower() == "s";
+
+                if (playAgain)
+                {
+                    Console.Clear();
+                    playerScore = 0;
+                    computerScore = 0;
+                    JogarPedraPapelTesoura(); // Chama o método novamente para iniciar um novo jogo
+                }
+                else
+                {
+                    MostrarTelaPrincipal();
+                }
+            }
+        }
+    }
+
+    #endregion jogo Pedra Papel Tesoura
+
     #region sair
     public static void Sair()
     {
@@ -766,33 +860,23 @@ class Program
             System.Console.WriteLine($"Seja bem vindo(a) pela sua primeira vez {nomeUsuario}");
             System.Console.WriteLine($"{nomeUsuario} sua senha atual é {senhaUsuario}");
             System.Console.WriteLine("");
-            System.Console.WriteLine($"------ {nomeUsuario} este é o nosso menu ------");
-            System.Console.WriteLine("1- Calculando a taxa de Crescimento da População");
-            System.Console.WriteLine("2- Calculadora");
-            System.Console.WriteLine("3- Gerador de Números Aleatórios");
-            System.Console.WriteLine("4- Calcular IMC");
-            System.Console.WriteLine("5- Conversor de Moedas");
-            System.Console.WriteLine("6- Probabilidade");
-            System.Console.WriteLine("7- Cantanda");
-            System.Console.WriteLine("8- Sair");
-            resposta = Console.ReadLine();
         }
         else
         {
             System.Console.WriteLine($"Seja bem vindo(a) {nomeUsuario}");
             System.Console.WriteLine("");
-            System.Console.WriteLine($"------ {nomeUsuario} este é o nosso menu ------");
-            System.Console.WriteLine("1- Calculando a taxa de Crescimento da População");
-            System.Console.WriteLine("2- Calculadora");
-            System.Console.WriteLine("3- Gerador de Números Aleatórios");
-            System.Console.WriteLine("4- Calcular IMC");
-            System.Console.WriteLine("5- Conversor de Moedas");
-            System.Console.WriteLine("6- Probabilidade");
-            System.Console.WriteLine("7- Cantada");
-            System.Console.WriteLine("8- Sair");
-            resposta = Console.ReadLine();
         }
+        System.Console.WriteLine($"------ {nomeUsuario} este é o nosso menu ------");
+        System.Console.WriteLine("1- Calculando a taxa de Crescimento da População");
+        System.Console.WriteLine("2- Calculadora");
+        System.Console.WriteLine("3- Gerador de Números Aleatórios");
+        System.Console.WriteLine("4- Calcular IMC");
+        System.Console.WriteLine("5- Conversor de Moedas");
+        System.Console.WriteLine("6- Probabilidade");
+        System.Console.WriteLine("7- Cantanda");
+        System.Console.WriteLine("8- Jogo Pedra Papel ou Tesoura");
+        System.Console.WriteLine("9- Sair");
+        resposta = Console.ReadLine();
     }
     #endregion Menu 
-
 }
