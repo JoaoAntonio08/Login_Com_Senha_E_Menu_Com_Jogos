@@ -13,6 +13,7 @@ Esse código é um programa em C# que gerencia um sistema de login, cadastro de 
    - Converter entre diferentes moedas (Dólar, Euro, Bitcoin e Ethereum).
    - Calcular a probabilidade de um evento com base no fatorial de um número.
    - Jogo Pedra Papel e Tesoura
+   - Lista de Tarefas
    - Sair do programa.
 
 4. **Funcionalidades**:
