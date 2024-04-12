@@ -7,8 +7,6 @@ using System.Text.RegularExpressions;
 class Program
 {
     // Declarando variáveis globais
-    public static string item,
-        caminhoArquivo;
     public static double altura,
         peso,
         imc;
@@ -31,7 +29,8 @@ class Program
         resposta;
     public static int SenhaTentativa,
         senhaUsuario;
-    public static bool senhaCorreta = false, verifSenha = false;
+    public static bool senhaCorreta = false,
+        verifSenha = false;
     public static int tentativas;
     public static string ultimaTelaVisitada;
 
@@ -411,6 +410,7 @@ class Program
     #region Taxa De crescimento
     public static void TaxaPopulacao()
     {
+        // programa teste para calcular uma taxa ficticia de crescimento entre 2 paises
         Console.Clear();
         System.Console.WriteLine(
             $"############# Seja Bem Vindo {nomeUsuario} ao programa de calcular taxa de crescimento #############"
@@ -530,6 +530,7 @@ class Program
     #region calculadora de imc
     public static void CalcularIMC()
     {
+        // calculo de IMC
         System.Console.WriteLine(
             $"Ola, {nomeUsuario}, aqui você pode calcular seu Índice de Massa Corporal"
         );
@@ -538,10 +539,10 @@ class Program
         System.Console.WriteLine("Agora informe seu peso: ");
         peso = double.Parse(Console.ReadLine());
 
-        imc = peso / (altura * altura);
+        imc = peso / (altura * altura); // Conta para verificação de IMC
 
-        System.Console.WriteLine($"Seu IMC é de {imc:F2}");
-        switch (imc)
+        System.Console.WriteLine($"Seu IMC é de {imc:F2}"); 
+        switch (imc) // Utilização de Switch case para verificar qual é seu IMC
         {
             case < 18.5:
                 System.Console.WriteLine("Você está abaixo do peso");
@@ -568,6 +569,7 @@ class Program
     #region conversor de moedas
     public static void ConversorMoedas()
     {
+        // Programa para fazer a conversão de moedas
         System.Console.WriteLine($"###### Ola {nomeUsuario}, este é o nosso conversor de moedas");
         System.Console.WriteLine("Aqui você pode converter as principais moedas do mundo");
         System.Console.WriteLine("");
@@ -584,7 +586,7 @@ class Program
         valorMonetario = double.Parse(Console.ReadLine());
 
         #region situações
-        if (convesorMoeda == 1)
+        if (convesorMoeda == 1) // Aqui estão as possiveis situações, com mensagens personalizadas
         {
             double valorEmDolar = valorMonetario; // Valor que você quer converter de Dólar para Real
             double valorEmReal = ConverterDolarParaReal(valorEmDolar);
@@ -647,7 +649,7 @@ class Program
     #region Probabilidade
     public class Probabilidade
     {
-        public static long Fatorial(int numero)
+        public static long Fatorial(int numero) //função para criar um long
         {
             long resultado = 1;
             for (int i = 1; i <= numero; i++)
@@ -660,6 +662,7 @@ class Program
 
     public static class Calc
     {
+        // Programa simples para fazer calculo de fatorial
         public static void ExecutarCalculo()
         {
             Console.Clear();
@@ -670,7 +673,7 @@ class Program
             System.Console.WriteLine("Digite um número para fazer seu fatorial");
             int numero = int.Parse(Console.ReadLine());
 
-            if (numero >= 50)
+            if (numero >= 50) // Limite máx do programa é 50, depois disso o programa buga e aparece números errados
             {
                 System.Console.WriteLine(
                     "Número Inválido, por favor digite um número menor que 50"
@@ -679,7 +682,7 @@ class Program
                 Calc.ExecutarCalculo();
             }
 
-            long fatorial = Probabilidade.Fatorial(numero);
+            long fatorial = Probabilidade.Fatorial(numero); // criando um Long com fatorial, sendo assim possivel ver as possibilidades
             Console.WriteLine($"Há um total de {fatorial} possibilidades.");
         }
 
@@ -693,6 +696,7 @@ class Program
     #region Ajuda certa
     public static void Cantada()
     {
+        // Um programa simples de cantadas, para o entreterimento
         Console.Clear();
         System.Console.WriteLine(
             $"##### Ola {nomeUsuario} aqui onde você encontra as melhores cantandas #####"
@@ -713,6 +717,8 @@ class Program
             Console.ReadLine();
             Random rnd = new Random();
             int select = rnd.Next(1, 8);
+            // acima ele cria um novo Randon para escolher entre 1 a 8 aleatóriamente, e o número que cair atribuir a variavel select
+            // A variavel select é responsável por escolher a cantada através dos If e Else If
 
             if (select == 1)
             {
@@ -810,11 +816,15 @@ class Program
             bool validInput = false;
             while (!validInput)
             {
-                Console.WriteLine("Escolha pedra, papel ou tesoura:");
+                Console.WriteLine("Escolha entre:"); 
+                System.Console.WriteLine("1. Pedra");
+                System.Console.WriteLine("2. Papel");
+                System.Console.WriteLine("3. Tesoura");
                 playerChoice = Console.ReadLine().ToLower();
 
                 // Verifica se a entrada é válida
-                if (playerChoice == "pedra" || playerChoice == "papel" || playerChoice == "tesoura")
+                if (playerChoice == "pedra" || playerChoice == "papel" || playerChoice == "tesoura" 
+                    || playerChoice == "1" || playerChoice == "2" || playerChoice == "3") // Verificação do que o usuário pode escolher
                 {
                     validInput = true;
                 }
@@ -824,7 +834,7 @@ class Program
                 }
             }
 
-            computerChoice = choices[random.Next(choices.Length)];
+            computerChoice = choices[random.Next(choices.Length)]; // Comando para o computador escolher uma entre as 3 opções aleatoriamente
             Console.WriteLine(
                 $"Você escolheu {playerChoice}, o computador escolheu {computerChoice}."
             );
@@ -833,13 +843,13 @@ class Program
             {
                 Console.WriteLine("Empate!");
             }
-            else if (
-                (playerChoice == "pedra" && computerChoice == "tesoura")
+            else if ( // Fazendo todas as verificações para ver se o usuário ganhou
+                (playerChoice == "pedra" && computerChoice == "tesoura") 
                 || (playerChoice == "papel" && computerChoice == "pedra")
                 || (playerChoice == "tesoura" && computerChoice == "papel")
             )
             {
-                Console.WriteLine("Você ganhou!");
+                Console.WriteLine($"Parabéns {nomeUsuario} você ganhou!");
                 playerScore++;
             }
             else
@@ -848,12 +858,12 @@ class Program
                 computerScore++;
             }
 
-            Console.WriteLine($"Pontuação: Você {playerScore}, Computador {computerScore}");
+            Console.WriteLine($"Pontuação: Você {playerScore}, Computador {computerScore}"); // Esquema de pontuação
             Console.ReadLine();
             Console.Clear();
 
             // Verifica se o jogo deve terminar
-            if (playerScore == 5 || computerScore == 5)
+            if (playerScore == 5 || computerScore == 5) // Para verificar se a partida acabou ao chegar 5 pontos
             {
                 Console.WriteLine("Fim de jogo!");
 
@@ -880,6 +890,7 @@ class Program
     #region List
     public static void ListTarefas()
     {
+        // Criação da lista e salvamento através de um arquvio .txt
         List<string> listTarefas = new List<string>();
         string caminhoArquivo = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -910,27 +921,29 @@ class Program
         System.Console.WriteLine("4- Sair");
         escolhaList = int.Parse(Console.ReadLine());
 
-        if (escolhaList == 1)
+        // Através da escolha dos menu você pode alterar sua lista, podendo adicionar, ver, excluir os itens
+
+        if (escolhaList == 1) // Para adicionar
         {
             Console.Clear();
             Console.WriteLine("Digite um item para adicionar à lista:");
             string item = Console.ReadLine();
             listTarefas.Add(item);
 
-            using (StreamWriter sw = new StreamWriter(caminhoArquivo, true))
+            using (StreamWriter sw = new StreamWriter(caminhoArquivo, true)) // aqui está escrevendo o item no arquivo
             {
                 sw.WriteLine(item);
             }
             ListTarefas();
         }
-        else if (escolhaList == 2)
+        else if (escolhaList == 2) // Para visualizar
         {
             Console.Clear();
             System.Console.WriteLine("Este são os itens já registrados:");
             System.Console.WriteLine("--------------------------------");
             for (int i = 0; i < listTarefas.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {listTarefas[i]}");
+                Console.WriteLine($"{i + 1}. {listTarefas[i]}"); // está mostrando todos os itens dentro do arquivo .txt
             }
             System.Console.WriteLine("--------------------------------");
             System.Console.WriteLine("");
@@ -938,12 +951,12 @@ class Program
             Console.ReadLine();
             ListTarefas();
         }
-        else if (escolhaList == 3)
+        else if (escolhaList == 3) // Para excluir
         {
             do
             {
                 Console.Clear();
-                System.Console.WriteLine("Este são os itens já registrados:");
+                System.Console.WriteLine("Este são os itens já registrados:"); // Primeiramente ele mostra os arquvios para visualizar
                 System.Console.WriteLine("");
                 System.Console.WriteLine("--------------------------------");
                 for (int i = 0; i < listTarefas.Count; i++)
@@ -953,12 +966,12 @@ class Program
                 System.Console.WriteLine("--------------------------------");
                 System.Console.WriteLine("");
 
-                Console.WriteLine("Digite o número do item a ser removido:");
+                Console.WriteLine("Digite o número do item a ser removido:"); // Digitar o número correspondente para excluir
                 int numeroItem = int.Parse(Console.ReadLine());
                 int indiceItem = numeroItem - 1;
 
                 System.Console.WriteLine("");
-                Console.WriteLine("Digite sua senha para confirmar a exclusão:");
+                Console.WriteLine("Digite sua senha para confirmar a exclusão:"); // A senha ja cadastrada é utilizada aqui para confirmar exclusão
 
                 int codigoVerificacao = int.Parse(Console.ReadLine());
                 int codigoCorreto = senhaUsuario;
@@ -976,7 +989,7 @@ class Program
                                 sw.WriteLine(item);
                             }
                         }
-                        
+
                         System.Console.WriteLine("Item excluído!");
                         verifSenha = true;
                         Console.ReadLine();
@@ -992,7 +1005,7 @@ class Program
                 {
                     System.Console.WriteLine("Número Inválido... Exclusão cancelada");
                 }
-            } while (verifSenha == false);
+            } while (verifSenha == false); // while funciona caso o número escrito esteja errado
         }
         else if (escolhaList == 4)
         {
@@ -1004,6 +1017,7 @@ class Program
     #region sair
     public static void Sair()
     {
+        // Quando o usuário quiser sair, aparece uma mensagem de despedida
         System.Console.WriteLine($"Obrigado pela preferência {nomeUsuario}, volte sempre!");
         System.Console.WriteLine("Pressione qualquer tecla para sair: ");
         string sair = Console.ReadLine();
@@ -1014,6 +1028,8 @@ class Program
     #region Menu
     public static void VerficacaoUsuario()
     {
+        // Aqui é o menu principal, onde temos uma verificação se a primeira vez que a pessoa entra, ou se já estava cadastrada
+        // Logo é exibido o menu, para poder escolher entre várias opções através de números
         if (senhaCorreta = false)
         {
             System.Console.WriteLine($"Seja bem vindo(a) pela sua primeira vez {nomeUsuario}");
