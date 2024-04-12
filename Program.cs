@@ -1,15 +1,20 @@
 using System;
 using System.Linq.Expressions;
-using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 class Program
 {
     // Declarando variáveis globais
-    public static string item, caminhoArquivo;
-    public static double altura, peso, imc;
+    public static string item,
+        caminhoArquivo;
+    public static double altura,
+        peso,
+        imc;
     public static int escolhaList;
-    public static string playerChoice, computerChoice;
+    public static string playerChoice,
+        computerChoice;
     public static int playerScore = 0;
     public static int computerScore = 0;
     public static string[] choices = { "pedra", "papel", "tesoura" };
@@ -21,9 +26,12 @@ class Program
     public static double taxaCambioEthereumParaReal = 13779.65;
     public static double valorMonetario;
 
-    public static string strSenhaTentativa, nomeUsuario, resposta;
-    public static int SenhaTentativa, senhaUsuario;
-    public static bool senhaCorreta = false;
+    public static string strSenhaTentativa,
+        nomeUsuario,
+        resposta;
+    public static int SenhaTentativa,
+        senhaUsuario;
+    public static bool senhaCorreta = false, verifSenha = false;
     public static int tentativas;
     public static string ultimaTelaVisitada;
 
@@ -870,25 +878,30 @@ class Program
     #endregion jogo Pedra Papel Tesoura
 
     #region List
-public static void ListTarefas()
-{
-    List<string> listTarefas = new List<string>();
-    string caminhoArquivo = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "listaTarefas.txt");
-
-    if (File.Exists(caminhoArquivo))
+    public static void ListTarefas()
     {
-        using (StreamReader sr = new StreamReader(caminhoArquivo))
+        List<string> listTarefas = new List<string>();
+        string caminhoArquivo = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "listaTarefas.txt"
+        );
+
+        if (File.Exists(caminhoArquivo))
         {
-            string linha;
-            while ((linha = sr.ReadLine()) != null)
+            using (StreamReader sr = new StreamReader(caminhoArquivo))
             {
-                listTarefas.Add(linha);
+                string linha;
+                while ((linha = sr.ReadLine()) != null)
+                {
+                    listTarefas.Add(linha);
+                }
             }
         }
-    }
 
         Console.Clear();
-        System.Console.WriteLine($"###### Ola {nomeUsuario} Seja Bem vindo a Lista de Tarefas ######");
+        System.Console.WriteLine(
+            $"###### Ola {nomeUsuario} Seja Bem vindo a Lista de Tarefas ######"
+        );
         System.Console.WriteLine("");
         System.Console.WriteLine("O que deseja fazer?");
         System.Console.WriteLine("1- Adicionar item");
@@ -927,64 +940,65 @@ public static void ListTarefas()
         }
         else if (escolhaList == 3)
         {
-            Console.Clear();
-            System.Console.WriteLine("Este são os itens já registrados:");
-            System.Console.WriteLine("");
-            System.Console.WriteLine("--------------------------------");
-            for (int i = 0; i < listTarefas.Count; i++)
+            do
             {
-                Console.WriteLine($"{i + 1}. {listTarefas[i]}");
-            }
-            System.Console.WriteLine("--------------------------------");
-            System.Console.WriteLine("");
-            
-            Console.WriteLine("Digite o número do item a ser removido:");
-            int numeroItem = int.Parse(Console.ReadLine());
-            int indiceItem = numeroItem - 1;
-            
-            System.Console.WriteLine("");
-            Console.WriteLine("Digite sua senha para confirmar a exclusão:");
-            
-            int codigoVerificacao = int.Parse(Console.ReadLine());
-            int codigoCorreto = senhaUsuario;
-            
-            if (codigoVerificacao == codigoCorreto)
-            {
-                if (indiceItem >= 0 && indiceItem < listTarefas.Count)
+                Console.Clear();
+                System.Console.WriteLine("Este são os itens já registrados:");
+                System.Console.WriteLine("");
+                System.Console.WriteLine("--------------------------------");
+                for (int i = 0; i < listTarefas.Count; i++)
                 {
-                    listTarefas.RemoveAt(indiceItem);
+                    Console.WriteLine($"{i + 1}. {listTarefas[i]}");
+                }
+                System.Console.WriteLine("--------------------------------");
+                System.Console.WriteLine("");
 
-                    using (StreamWriter sw = new StreamWriter(caminhoArquivo, false))
+                Console.WriteLine("Digite o número do item a ser removido:");
+                int numeroItem = int.Parse(Console.ReadLine());
+                int indiceItem = numeroItem - 1;
+
+                System.Console.WriteLine("");
+                Console.WriteLine("Digite sua senha para confirmar a exclusão:");
+
+                int codigoVerificacao = int.Parse(Console.ReadLine());
+                int codigoCorreto = senhaUsuario;
+
+                if (codigoVerificacao == codigoCorreto)
+                {
+                    if (indiceItem >= 0 && indiceItem < listTarefas.Count)
                     {
-                        foreach (string item in listTarefas)
+                        listTarefas.RemoveAt(indiceItem);
+
+                        using (StreamWriter sw = new StreamWriter(caminhoArquivo, false))
                         {
-                            sw.WriteLine(item);
+                            foreach (string item in listTarefas)
+                            {
+                                sw.WriteLine(item);
+                            }
                         }
-                    }
+                        
                         System.Console.WriteLine("Item excluído!");
+                        verifSenha = true;
                         Console.ReadLine();
                         ListTarefas();
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Número Inválido...");
+                        Console.ReadLine();
+                    }
                 }
                 else
                 {
-                    System.Console.WriteLine("Número Inválido...");
-                    Console.ReadLine();
-                    ListTarefas();
+                    System.Console.WriteLine("Número Inválido... Exclusão cancelada");
                 }
-            }
-            else
-            {
-                System.Console.WriteLine("Número Inválido... Exclusão cancelada");
-                Console.ReadLine();
-                ListTarefas();
-            }
+            } while (verifSenha == false);
         }
-
-                else if (escolhaList == 4)
-                {
-                    MostrarTelaPrincipal(); // Sair do loop
-                }
-}
+        else if (escolhaList == 4)
+        {
+            MostrarTelaPrincipal(); // Sair do loop
+        }
+    }
     #endregion List
 
     #region sair
