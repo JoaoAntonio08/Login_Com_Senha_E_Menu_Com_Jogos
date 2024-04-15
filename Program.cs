@@ -541,7 +541,7 @@ class Program
 
         imc = peso / (altura * altura); // Conta para verificação de IMC
 
-        System.Console.WriteLine($"Seu IMC é de {imc:F2}"); 
+        System.Console.WriteLine($"Seu IMC é de {imc:F2}");
         switch (imc) // Utilização de Switch case para verificar qual é seu IMC
         {
             case < 18.5:
@@ -816,14 +816,14 @@ class Program
             bool validInput = false;
             while (!validInput)
             {
-                Console.WriteLine("Escolha entre:"); 
+                Console.WriteLine("Escolha entre:");
                 System.Console.WriteLine("1. Pedra");
                 System.Console.WriteLine("2. Papel");
                 System.Console.WriteLine("3. Tesoura");
                 playerChoice = Console.ReadLine().ToLower();
 
                 // Verifica se a entrada é válida
-                if (playerChoice == "pedra" || playerChoice == "papel" || playerChoice == "tesoura" 
+                if (playerChoice == "pedra" || playerChoice == "papel" || playerChoice == "tesoura"
                     || playerChoice == "1" || playerChoice == "2" || playerChoice == "3") // Verificação do que o usuário pode escolher
                 {
                     validInput = true;
@@ -844,7 +844,7 @@ class Program
                 Console.WriteLine("Empate!");
             }
             else if ( // Fazendo todas as verificações para ver se o usuário ganhou
-                (playerChoice == "pedra" && computerChoice == "tesoura") 
+                (playerChoice == "pedra" && computerChoice == "tesoura")
                 || (playerChoice == "papel" && computerChoice == "pedra")
                 || (playerChoice == "tesoura" && computerChoice == "papel")
             )
@@ -918,7 +918,8 @@ class Program
         System.Console.WriteLine("1- Adicionar item");
         System.Console.WriteLine("2- Ver itens");
         System.Console.WriteLine("3- Excluir itens");
-        System.Console.WriteLine("4- Sair");
+        System.Console.WriteLine("4- Editar item");
+        System.Console.WriteLine("5- Sair");
         escolhaList = int.Parse(Console.ReadLine());
 
         // Através da escolha dos menu você pode alterar sua lista, podendo adicionar, ver, excluir os itens
@@ -1009,9 +1010,64 @@ class Program
         }
         else if (escolhaList == 4)
         {
+            Console.Clear();
+
+            // Exibe uma mensagem para o usuário
+            System.Console.WriteLine("Este são os itens já registrados:");
+            System.Console.WriteLine("--------------------------------");
+
+            // Itera sobre a lista de tarefas e exibe cada item
+            for (int i = 0; i < listTarefas.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {listTarefas[i]}");
+            }
+
+            System.Console.WriteLine("--------------------------------");
+            System.Console.WriteLine("");
+
+            // Solicita ao usuário o número do item a ser editado
+            Console.WriteLine("Digite o número do item a ser editado:");
+            int numeroItem = int.Parse(Console.ReadLine());
+            int indiceItem = numeroItem - 1; // Converte o número do item para um índice baseado em zero
+
+            // Verifica se o índice é válido
+            if (indiceItem >= 0 && indiceItem < listTarefas.Count)
+            {
+                // Solicita ao usuário o novo item
+                Console.WriteLine("Digite o novo item:");
+                string novoItem = Console.ReadLine();
+
+                // Atualiza a lista em memória com o novo item
+                listTarefas[indiceItem] = novoItem;
+
+                // Atualiza o arquivo com a nova lista de tarefas
+                using (StreamWriter sw = new StreamWriter(caminhoArquivo, false))
+                {
+                    foreach (string item in listTarefas)
+                    {
+                        sw.WriteLine(item);
+                    }
+                }
+
+                // Informa ao usuário que o item foi editado com sucesso
+                System.Console.WriteLine("Item editado!");
+                Console.ReadLine();
+                ListTarefas(); // Chama a função novamente para atualizar a lista exibida
+            }
+            else
+            {
+                // Informa ao usuário que o número inserido é inválido
+                System.Console.WriteLine("Número Inválido...");
+                Console.ReadLine();
+            }
+        }
+
+        else if (escolhaList == 5)
+        {
             MostrarTelaPrincipal(); // Sair do loop
         }
     }
+
     #endregion List
 
     #region sair
