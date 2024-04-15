@@ -41,6 +41,13 @@ class Program
         System.Console.WriteLine("##### PARA INICIARMOS DIGITE SEU NOME DE USUÁRIO #####");
         nomeUsuario = Console.ReadLine();
 
+        if (string.IsNullOrEmpty(nomeUsuario))
+        {
+            Console.WriteLine("A mensagem não pode estar vazia. Por favor, digite novamente.");
+            Console.ReadLine();
+            Main();
+        }
+
         // Verifica se o usuário existe no arquivo
         if (VerificarUsuarioExiste(nomeUsuario))
         {
@@ -926,60 +933,136 @@ class Program
 
         if (escolhaList == 1) // Para adicionar
         {
-            Console.Clear();
-            Console.WriteLine("Digite um item para adicionar à lista:");
-            string item = Console.ReadLine();
-            listTarefas.Add(item);
-
-            using (StreamWriter sw = new StreamWriter(caminhoArquivo, true)) // aqui está escrevendo o item no arquivo
+            if (escolhaList == 1) // Para adicionar
             {
-                sw.WriteLine(item);
+                Console.Clear();
+                Console.WriteLine("Digite a categoria da tarefa entre:");
+                System.Console.WriteLine("Muito Importante");
+                System.Console.WriteLine("Importante");
+                System.Console.WriteLine("Normal");
+                System.Console.WriteLine("Baixa Relevancia");
+                System.Console.WriteLine("Sem Relevancia");
+                System.Console.WriteLine("");
+                string categoria = Console.ReadLine().ToLower();
+
+                // Atribui um valor numérico à categoria de importância
+                int valorImportancia = 0;
+                switch (categoria)
+                {
+                    case "muito importante":
+                        valorImportancia = 1;
+                        break;
+                    case "importante":
+                        valorImportancia = 2;
+                        break;
+                    case "normal":
+                        valorImportancia = 3;
+                        break;
+                    case "baixa relevancia":
+                        valorImportancia = 4;
+                        break;
+                    case "sem relevancia":
+                        valorImportancia = 5;
+                        break;
+                    default:
+                        Console.WriteLine("Categoria inválida.");
+                        Console.ReadLine();
+                        ListTarefas();
+                        return;
+                }
+
+                System.Console.WriteLine("");
+                Console.WriteLine("Digite a descrição da tarefa:");
+                string descricao = Console.ReadLine();
+
+                // Validação de entrada
+                if (string.IsNullOrWhiteSpace(categoria) || string.IsNullOrWhiteSpace(descricao))
+                {
+                    Console.WriteLine("Por favor, insira informações válidas.");
+                    Console.ReadLine();
+                    ListTarefas();
+                    return;
+                }
+
+                string item = $"{valorImportancia}: {descricao}";
+                listTarefas.Add(item);
+
+                using (StreamWriter sw = new StreamWriter(caminhoArquivo, true)) // aqui está escrevendo o item no arquivo
+                {
+                    sw.WriteLine(item);
+                }
+                ListTarefas();
             }
-            ListTarefas();
+
         }
+
         else if (escolhaList == 2) // Para visualizar
         {
             Console.Clear();
-            System.Console.WriteLine("Este são os itens já registrados:");
+            System.Console.WriteLine("Estes são os itens já registrados:");
             System.Console.WriteLine("--------------------------------");
-            for (int i = 0; i < listTarefas.Count; i++)
+
+            // Mapeamento de números de importância para nomes de categoria
+            Dictionary<int, string> categorias = new Dictionary<int, string>
+    {
+        { 1, "Muito Importante" },
+        { 2, "Importante" },
+        { 3, "Normal" },
+        { 4, "Baixa Relevancia" },
+        { 5, "Sem Relavancia" }
+    };
+
+            // Ordena a lista de tarefas com base na importância
+            var tarefasOrdenadas = listTarefas.OrderBy(t => int.Parse(t.Split(':')[0]));
+
+            foreach (var tarefa in tarefasOrdenadas)
             {
-                Console.WriteLine($"{i + 1}. {listTarefas[i]}"); // está mostrando todos os itens dentro do arquivo .txt
+                // Obtém o número de importância e a descrição da tarefa
+                string[] partes = tarefa.Split(':');
+                int valorImportancia = int.Parse(partes[0]);
+                string descricao = partes[1];
+
+                // Obtém o nome da categoria com base no número de importância
+                string nomeCategoria = categorias[valorImportancia];
+
+                // Exibe a tarefa com o nome da categoria
+                Console.WriteLine($"{nomeCategoria}: {descricao}");
             }
+
             System.Console.WriteLine("--------------------------------");
             System.Console.WriteLine("");
-            System.Console.WriteLine("Pressione a tecla para voltar ao menu");
+            System.Console.WriteLine("Pressione qualquer tecla para voltar ao menu");
             Console.ReadLine();
             ListTarefas();
         }
+
         else if (escolhaList == 3) // Para excluir
         {
+            bool senhaCorreta = false;
             do
             {
                 Console.Clear();
-                System.Console.WriteLine("Este são os itens já registrados:"); // Primeiramente ele mostra os arquvios para visualizar
+                System.Console.WriteLine("Estes são os itens já registrados:");
                 System.Console.WriteLine("");
                 System.Console.WriteLine("--------------------------------");
                 for (int i = 0; i < listTarefas.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {listTarefas[i]}");
+                    Console.WriteLine($"{i + 1}. {listTarefas[i].Split(':')[1]}");
                 }
                 System.Console.WriteLine("--------------------------------");
                 System.Console.WriteLine("");
 
-                Console.WriteLine("Digite o número do item a ser removido:"); // Digitar o número correspondente para excluir
+                Console.WriteLine("Digite o número do item a ser removido:");
                 int numeroItem = int.Parse(Console.ReadLine());
                 int indiceItem = numeroItem - 1;
 
-                System.Console.WriteLine("");
-                Console.WriteLine("Digite sua senha para confirmar a exclusão:"); // A senha ja cadastrada é utilizada aqui para confirmar exclusão
-
-                int codigoVerificacao = int.Parse(Console.ReadLine());
-                int codigoCorreto = senhaUsuario;
-
-                if (codigoVerificacao == codigoCorreto)
+                if (indiceItem >= 0 && indiceItem < listTarefas.Count)
                 {
-                    if (indiceItem >= 0 && indiceItem < listTarefas.Count)
+                    Console.WriteLine("Digite sua senha para confirmar a exclusão:");
+                    int codigoVerificacao = int.Parse(Console.ReadLine());
+                    int codigoCorreto = senhaUsuario;
+
+                    if (codigoVerificacao == codigoCorreto)
                     {
                         listTarefas.RemoveAt(indiceItem);
 
@@ -992,31 +1075,31 @@ class Program
                         }
 
                         System.Console.WriteLine("Item excluído!");
-                        verifSenha = true;
+                        senhaCorreta = true;
                         Console.ReadLine();
                         ListTarefas();
                     }
                     else
                     {
-                        System.Console.WriteLine("Número Inválido...");
+                        System.Console.WriteLine("Senha inválida. Tente novamente.");
                         Console.ReadLine();
                     }
                 }
                 else
                 {
-                    System.Console.WriteLine("Número Inválido... Exclusão cancelada");
+                    System.Console.WriteLine("Número Inválido...");
+                    Console.ReadLine();
                 }
-            } while (verifSenha == false); // while funciona caso o número escrito esteja errado
+            } while (!senhaCorreta);
         }
-        else if (escolhaList == 4)
+
+
+        else if (escolhaList == 4) // Para editar
         {
             Console.Clear();
-
-            // Exibe uma mensagem para o usuário
-            System.Console.WriteLine("Este são os itens já registrados:");
+            System.Console.WriteLine("Estes são os itens já registrados:");
             System.Console.WriteLine("--------------------------------");
 
-            // Itera sobre a lista de tarefas e exibe cada item
             for (int i = 0; i < listTarefas.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {listTarefas[i]}");
@@ -1025,19 +1108,62 @@ class Program
             System.Console.WriteLine("--------------------------------");
             System.Console.WriteLine("");
 
-            // Solicita ao usuário o número do item a ser editado
             Console.WriteLine("Digite o número do item a ser editado:");
             int numeroItem = int.Parse(Console.ReadLine());
-            int indiceItem = numeroItem - 1; // Converte o número do item para um índice baseado em zero
+            int indiceItem = numeroItem - 1;
 
-            // Verifica se o índice é válido
             if (indiceItem >= 0 && indiceItem < listTarefas.Count)
             {
-                // Solicita ao usuário o novo item
-                Console.WriteLine("Digite o novo item:");
-                string novoItem = Console.ReadLine();
+                System.Console.WriteLine("");
+                Console.WriteLine("Digite a nova categoria da tarefa:");
+                System.Console.WriteLine("");
+                System.Console.WriteLine("Muito Importante");
+                System.Console.WriteLine("Importante");
+                System.Console.WriteLine("Normal");
+                System.Console.WriteLine("Baixa Relevancia");
+                System.Console.WriteLine("Sem Relevancia");
+                System.Console.WriteLine("");
+                string novaCategoria = Console.ReadLine().ToLower();
 
-                // Atualiza a lista em memória com o novo item
+                // Atribui um valor numérico à categoria de importância
+                int novoValorImportancia = 0;
+                switch (novaCategoria)
+                {
+                    case "muito importante":
+                        novoValorImportancia = 1;
+                        break;
+                    case "importante":
+                        novoValorImportancia = 2;
+                        break;
+                    case "normal":
+                        novoValorImportancia = 3;
+                        break;
+                    case "baixa relevancia":
+                        novoValorImportancia = 4;
+                        break;
+                    case "sem relevancia":
+                        novoValorImportancia = 5;
+                        break;
+                    default:
+                        Console.WriteLine("Categoria inválida.");
+                        Console.ReadLine();
+                        ListTarefas();
+                        return;
+                }
+                System.Console.WriteLine("");
+                Console.WriteLine("Digite a nova descrição da tarefa:");
+                string novaDescricao = Console.ReadLine();
+
+                // Validação de entrada
+                if (string.IsNullOrWhiteSpace(novaCategoria) || string.IsNullOrWhiteSpace(novaDescricao))
+                {
+                    Console.WriteLine("Por favor, insira informações válidas.");
+                    Console.ReadLine();
+                    ListTarefas();
+                    return;
+                }
+
+                string novoItem = $"{novoValorImportancia}: {novaDescricao}";
                 listTarefas[indiceItem] = novoItem;
 
                 // Atualiza o arquivo com a nova lista de tarefas
@@ -1049,23 +1175,24 @@ class Program
                     }
                 }
 
-                // Informa ao usuário que o item foi editado com sucesso
+                System.Console.WriteLine("");
                 System.Console.WriteLine("Item editado!");
                 Console.ReadLine();
                 ListTarefas(); // Chama a função novamente para atualizar a lista exibida
             }
             else
             {
-                // Informa ao usuário que o número inserido é inválido
                 System.Console.WriteLine("Número Inválido...");
                 Console.ReadLine();
             }
         }
 
+
         else if (escolhaList == 5)
         {
             MostrarTelaPrincipal(); // Sair do loop
         }
+
     }
 
     #endregion List
