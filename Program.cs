@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 class Program
 {
@@ -824,6 +823,19 @@ class Program
                 {
                     Console.WriteLine("Entrada inválida. Tente novamente.");
                 }
+            }
+
+            if (playerChoice == "1")
+            {
+                playerChoice = "pedra";
+            }
+            else if (playerChoice == "2")
+            {
+                playerChoice = "papel";
+            }
+            else if (playerChoice == "3")
+            {
+                playerChoice = "tesoura";
             }
 
             computerChoice = choices[random.Next(choices.Length)]; // Comando para o computador escolher uma entre as 3 opções aleatoriamente
