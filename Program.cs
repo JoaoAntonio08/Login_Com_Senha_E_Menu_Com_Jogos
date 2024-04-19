@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 class Program
 {
@@ -266,7 +267,7 @@ class Program
             else if (resposta == "7")
             {
                 Console.Clear();
-                Cantada();
+                Motivacional();
             }
             else if (resposta == "8")
             {
@@ -701,12 +702,12 @@ class Program
     #endregion Probabilidade
 
     #region Ajuda certa
-    public static void Cantada()
+    public static void Motivacional()
     {
-        // Um programa simples de cantadas, para o entreterimento
+        // Um programa simples de motivacional, para o entreterimento
         Console.Clear();
         System.Console.WriteLine(
-            $"##### Ola {nomeUsuario} aqui onde você encontra as melhores cantandas #####"
+            $"##### Ola {nomeUsuario} aqui onde você encontra as melhores frases motivacionais #####"
         );
         System.Console.WriteLine("");
         System.Console.WriteLine("1- Começar");
@@ -716,85 +717,69 @@ class Program
         if (escolha == 1)
         {
             Console.Clear();
-            System.Console.WriteLine("Estamos gerando uma cantanda...");
+            System.Console.WriteLine("Estamos gerando uma frase motivacional...");
             System.Console.WriteLine(".........");
             System.Console.WriteLine("");
             System.Console.WriteLine("");
-            System.Console.WriteLine("Cantada gerada aperte ENTER para ve-la");
+            System.Console.WriteLine("Frase motivacional gerada aperte ENTER para ve-la");
             Console.ReadLine();
             Random rnd = new Random();
             int select = rnd.Next(1, 8);
             // acima ele cria um novo Randon para escolher entre 1 a 8 aleatóriamente, e o número que cair atribuir a variavel select
-            // A variavel select é responsável por escolher a cantada através dos If e Else If
+            // A variavel select é responsável por escolher a Motivacional através dos If e Else If
 
             if (select == 1)
             {
                 Console.Clear();
-                System.Console.WriteLine("🐕");
-                System.Console.WriteLine("Desculpa é que eu não treinei meu cachorro direito...");
-                System.Console.WriteLine("Ele vive correndo atrás de gatinhas");
+                System.Console.WriteLine("Hoc non pereo habebo fortior me");
+                System.Console.WriteLine("O que não me mata me fortalece.");
                 Console.ReadLine();
-                Cantada();
+                Motivacional();
             }
             else if (select == 2)
             {
                 Console.Clear();
-                System.Console.WriteLine("Tentaram me derrubar aqui, mas eles não sabem");
-                System.Console.WriteLine("Que a única coisa que me derruba é seu sorriso/olhar");
+                System.Console.WriteLine("Veni, vidi, vici");
+                System.Console.WriteLine("Vim, vi, venci.");
                 Console.ReadLine();
-                Cantada();
+                Motivacional();
             }
             else if (select == 3)
             {
                 Console.Clear();
-                System.Console.WriteLine("Parabéns!");
-                System.Console.WriteLine("Você acaba de ganhar uma vaga na USLM");
-                System.Console.WriteLine("");
-                System.Console.WriteLine("Universidade do");
-                System.Console.WriteLine("Sorriso Mais");
-                System.Console.WriteLine("Lindo do");
-                System.Console.WriteLine("Mundo");
+                System.Console.WriteLine("Si vis pacem, Para bellum");
+                System.Console.WriteLine("Se deseja paz, prepara-se para guerra");
                 Console.ReadLine();
-                Cantada();
+                Motivacional();
             }
             else if (select == 4)
             {
                 Console.Clear();
-                System.Console.WriteLine("Mas isso é um storys ou");
-                System.Console.WriteLine("Um trailer para o paraíso??");
+                System.Console.WriteLine("Sou nascido para vencer");
                 Console.ReadLine();
-                Cantada();
+                Motivacional();
             }
             else if (select == 5)
             {
                 Console.Clear();
-                System.Console.WriteLine("🍿");
-                System.Console.WriteLine("Até deixei um pouco de pipoca cair");
-                System.Console.WriteLine("Depois de ver esse espetáculo");
+                System.Console.WriteLine("O sucesso é a melhor forma de vingança");
                 Console.ReadLine();
-                Cantada();
+                Motivacional();
             }
             else if (select == 6)
             {
                 Console.Clear();
-                System.Console.WriteLine("Se você fosse um crime...");
-                System.Console.WriteLine(
-                    "Não me importaria de passar o resto da minha vida na prisão"
-                );
+                System.Console.WriteLine("Quanto maior a queda, maior será a reviravolta");
                 Console.ReadLine();
-                Cantada();
+                Motivacional();
             }
             else if (select == 7)
             {
                 Console.Clear();
-                System.Console.WriteLine("Boa noite aqui é do detran");
-                System.Console.WriteLine("Você acaba de receber 2 multas");
-                System.Console.WriteLine("Uma exesso de velocidade dos meus batimentos caridiácos");
-                System.Console.WriteLine(
-                    "E outra por atroplear meu pscológico com essa sua beleza"
-                );
+                System.Console.WriteLine("A adversidade revela o verdadeiro campeão que há em");
+                System.Console.WriteLine("VOCÊ");
                 Console.ReadLine();
-                Cantada();
+                Motivacional();
             }
         }
         else if (escolha == 2)
@@ -808,7 +793,7 @@ class Program
             System.Console.WriteLine("Por favor informe um valor válido");
             System.Console.WriteLine("Pressione ENTER para voltar");
             Console.ReadLine();
-            Cantada();
+            Motivacional();
         }
     }
 
@@ -937,11 +922,11 @@ class Program
             {
                 Console.Clear();
                 Console.WriteLine("Digite a categoria da tarefa entre:");
-                System.Console.WriteLine("Muito Importante");
-                System.Console.WriteLine("Importante");
-                System.Console.WriteLine("Normal");
-                System.Console.WriteLine("Baixa Relevancia");
-                System.Console.WriteLine("Sem Relevancia");
+                System.Console.WriteLine("1- Muito Importante");
+                System.Console.WriteLine("2- Importante");
+                System.Console.WriteLine("3- Normal");
+                System.Console.WriteLine("4- Baixa Relevancia");
+                System.Console.WriteLine("5- Sem Relevancia");
                 System.Console.WriteLine("");
                 string categoria = Console.ReadLine().ToLower();
 
@@ -949,19 +934,19 @@ class Program
                 int valorImportancia = 0;
                 switch (categoria)
                 {
-                    case "muito importante":
+                    case "1":
                         valorImportancia = 1;
                         break;
-                    case "importante":
+                    case "2":
                         valorImportancia = 2;
                         break;
-                    case "normal":
+                    case "3":
                         valorImportancia = 3;
                         break;
-                    case "baixa relevancia":
+                    case "4":
                         valorImportancia = 4;
                         break;
-                    case "sem relevancia":
+                    case "5":
                         valorImportancia = 5;
                         break;
                     default:
@@ -1004,13 +989,13 @@ class Program
 
             // Mapeamento de números de importância para nomes de categoria
             Dictionary<int, string> categorias = new Dictionary<int, string>
-    {
-        { 1, "Muito Importante" },
-        { 2, "Importante" },
-        { 3, "Normal" },
-        { 4, "Baixa Relevancia" },
-        { 5, "Sem Relavancia" }
-    };
+                {
+                    { 1, "Muito Importante" },
+                    { 2, "Importante" },
+                    { 3, "Normal" },
+                    { 4, "Baixa Relevancia" },
+                    { 5, "Sem Relavancia" }
+                };
 
             // Ordena a lista de tarefas com base na importância
             var tarefasOrdenadas = listTarefas.OrderBy(t => int.Parse(t.Split(':')[0]));
@@ -1098,13 +1083,12 @@ class Program
         {
             Console.Clear();
             System.Console.WriteLine("Estes são os itens já registrados:");
+            System.Console.WriteLine("");
             System.Console.WriteLine("--------------------------------");
-
             for (int i = 0; i < listTarefas.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {listTarefas[i]}");
+                Console.WriteLine($"{i + 1}. {listTarefas[i].Split(':')[1]}");
             }
-
             System.Console.WriteLine("--------------------------------");
             System.Console.WriteLine("");
 
@@ -1117,11 +1101,11 @@ class Program
                 System.Console.WriteLine("");
                 Console.WriteLine("Digite a nova categoria da tarefa:");
                 System.Console.WriteLine("");
-                System.Console.WriteLine("Muito Importante");
-                System.Console.WriteLine("Importante");
-                System.Console.WriteLine("Normal");
-                System.Console.WriteLine("Baixa Relevancia");
-                System.Console.WriteLine("Sem Relevancia");
+                System.Console.WriteLine("1- Muito Importante");
+                System.Console.WriteLine("2- Importante");
+                System.Console.WriteLine("3- Normal");
+                System.Console.WriteLine("4- Baixa Relevancia");
+                System.Console.WriteLine("5- Sem Relevancia");
                 System.Console.WriteLine("");
                 string novaCategoria = Console.ReadLine().ToLower();
 
@@ -1129,19 +1113,19 @@ class Program
                 int novoValorImportancia = 0;
                 switch (novaCategoria)
                 {
-                    case "muito importante":
+                    case "1":
                         novoValorImportancia = 1;
                         break;
-                    case "importante":
+                    case "2":
                         novoValorImportancia = 2;
                         break;
-                    case "normal":
+                    case "3":
                         novoValorImportancia = 3;
                         break;
-                    case "baixa relevancia":
+                    case "4":
                         novoValorImportancia = 4;
                         break;
-                    case "sem relevancia":
+                    case "5":
                         novoValorImportancia = 5;
                         break;
                     default:
@@ -1231,7 +1215,7 @@ class Program
         System.Console.WriteLine("4- Calcular IMC");
         System.Console.WriteLine("5- Conversor de Moedas");
         System.Console.WriteLine("6- Probabilidade");
-        System.Console.WriteLine("7- Cantanda");
+        System.Console.WriteLine("7- Motivacional");
         System.Console.WriteLine("8- Jogo Pedra Papel ou Tesoura");
         System.Console.WriteLine("9- Lista de Tarefas");
         System.Console.WriteLine("10- Sair");
