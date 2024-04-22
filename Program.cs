@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 class Program
 {
@@ -861,16 +862,45 @@ class Program
                 Console.WriteLine("Você perdeu!");
                 computerScore++;
             }
-
+            
+            System.Console.WriteLine("");
             Console.WriteLine($"Pontuação: Você {playerScore}, Computador {computerScore}"); // Esquema de pontuação
             Console.ReadLine();
             Console.Clear();
 
-            // Verifica se o jogo deve terminar
-            if (playerScore == 5 || computerScore == 5) // Para verificar se a partida acabou ao chegar 5 pontos
+            if (playerScore == 5)
             {
-                Console.WriteLine("Fim de jogo!");
+                System.Console.WriteLine("Fim de jogo!");
+                System.Console.WriteLine("");
 
+                System.Console.WriteLine("Temos um grande vencedor aqui!");
+                System.Console.WriteLine($"Parabéns {nomeUsuario}");
+
+                System.Console.WriteLine("");
+                Console.WriteLine("Deseja jogar novamente? (s/n)");
+                playAgain = Console.ReadLine().ToLower() == "s";
+
+                if (playAgain)
+                {
+                    Console.Clear();
+                    playerScore = 0;
+                    computerScore = 0;
+                    JogarPedraPapelTesoura(); // Chama o método novamente para iniciar um novo jogo
+                }
+                else
+                {
+                    MostrarTelaPrincipal();
+                }
+            }
+            else if (computerScore == 5)
+            {
+                System.Console.WriteLine("Fim de jogo!");
+                System.Console.WriteLine("");
+
+                System.Console.WriteLine("Não foi dessa vez!");
+                System.Console.WriteLine($"Mas você pode tentar novamente {nomeUsuario}");
+
+                System.Console.WriteLine("");
                 Console.WriteLine("Deseja jogar novamente? (s/n)");
                 playAgain = Console.ReadLine().ToLower() == "s";
 
